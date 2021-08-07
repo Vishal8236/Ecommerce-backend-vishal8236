@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_07_040524) do
+ActiveRecord::Schema.define(version: 2021_08_07_164935) do
 
   create_table "users", force: :cascade do |t|
     t.string "name"
@@ -18,8 +18,16 @@ ActiveRecord::Schema.define(version: 2021_08_07_040524) do
     t.string "password"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "role"
     t.string "phone", limit: 10
+    t.integer "work_roles_id"
+    t.index ["work_roles_id"], name: "index_users_on_work_roles_id"
   end
 
+  create_table "work_roles", force: :cascade do |t|
+    t.string "role_name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  add_foreign_key "users", "work_roles", column: "work_roles_id"
 end
