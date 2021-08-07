@@ -2,16 +2,14 @@ class SessionController < ApplicationController
     skip_before_action :verify_authenticity_token
 
     def signup
-        @user = User.new(name: params[:user][:name], email: params[:user][:email],password: params[:user][:password])
-        
+        @user = User.new(name: params[:user][:name], email: params[:user][:email],password: params[:user][:password],phone: params[:user][:phone],role: params[:user][:role])
         if @user.save
-            # payload = {user_id: @user.id}
-            # token = encode(payload)
-            render :json => { user_name: params[:user][:name] }
+            payload = {user_id: @user.id}
+            token = encode(payload)
+            render :json => {user: @user, token: token}
         else
-            render json:{error: "some error while create user"}
+            render json:{error: "Some error while create user :( "}
         end
-        
     end
 
     def login
