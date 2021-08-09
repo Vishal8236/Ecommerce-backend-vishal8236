@@ -8,4 +8,5 @@ Rails.application.routes.draw do
   #seller routes
   post '/seller/all_shop', to: 'seller#index'
   post 'seller/:id/products', to: 'seller#seller_products'
+  post 'seller/create_shop', to: 'seller#create_shop'
 end
