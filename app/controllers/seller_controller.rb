@@ -21,4 +21,8 @@ class SellerController < ApplicationController
         end
     end
     
+    def delete_shop
+        byebug
+    end
+    
 end
