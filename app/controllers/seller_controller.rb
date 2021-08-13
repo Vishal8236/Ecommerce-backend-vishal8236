@@ -22,7 +22,9 @@ class SellerController < ApplicationController
     end
     
     def delete_shop
-        byebug
+        @shops = ShopInfo.find_by(name: params[:name]).delete
+        @all_shops = ShopInfo.where(user_id: 2)
+        render :json => {message: "Shop deleted succesfully.", shops: @all_shops}
     end
     
 end
