@@ -5,11 +5,18 @@ Rails.application.routes.draw do
   
   post '/signup', to: 'session#signup'
 
-  #seller routes
-  post '/seller/all_shop', to: 'seller#index'
-  post 'seller/:id/products', to: 'seller#seller_products'
+  scope '/seller'  do
+    resources :shops, only: [:index, :create, :update] do
+      resources :products
+    end #seller shop routes
 
-  #seller shop routes
-  post 'seller/create_shop', to: 'seller#create_shop'
-  delete 'seller/delete_shop/:name', to: 'seller#delete_shop'
+    #seller routes
+    post 'all_shop', to: 'seller#index'
+    post ':id/products', to: 'seller#seller_products'
+    
+    #seller shop routes
+    post 'create_shop', to: 'seller#create_shop'
+    delete 'delete_shop/:name', to: 'seller#delete_shop'
+  end
+
 end
