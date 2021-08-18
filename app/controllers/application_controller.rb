@@ -10,4 +10,8 @@ class ApplicationController < ActionController::Base
 	def decode(token)
 		JWT.decode(token, "myNameIsVishalPatidar", true, {algorithm: "HS256"})[0]
 	end
+
+	def current_user
+		return session[:current_user]
+	end
 end

@@ -25,16 +25,6 @@ class SessionController < ApplicationController
         end	
     end
 
-    def token_authentication
-        token = request.headers["Authenticate"]
-        begin
-            user = User.find(decode(token)["user_id"])
-            render :json => {user: user}
-        rescue => exception
-            render json:{error: "User not found"}	
-        end
-    end
-
     private
 
     def get_role_id(role_is)
