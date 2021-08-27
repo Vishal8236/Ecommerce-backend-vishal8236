@@ -24,7 +24,7 @@ class SellerController < ApplicationController
     def delete_shop
         @shops = ShopInfo.find_by(name: params[:name]).delete
         @all_shops = ShopInfo.where(user_id: 2)
-        render :json => {message: "Shop deleted succesfully.", shops: @all_shops}
+        render :json => {msg: "Shop deleted succesfully.", shops: @all_shops}
     end
     
 end

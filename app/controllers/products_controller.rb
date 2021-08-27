@@ -13,7 +13,7 @@ class ProductsController < ApplicationController
         if current_user
             hash_data = JSON.parse params[:data][:product_data]
             product_image_json = hash_data['product_image'].to_json
-            Product.create(
+            @product = Product.new(
                 product_name: hash_data["product_name"],
                 brand_name: hash_data["product_brand_name"],
                 price: hash_data["product_price"],
@@ -23,14 +23,20 @@ class ProductsController < ApplicationController
                 shop_info_id: find_shop(params[:shop_id]),
                 user_id: current_user.id,
             )
-            render json:{msg: "store successfully"}
+            if @product.save
+                render json:{success: "store successfully"}
+            else
+                render json:{error: @product.errors.full_messages}
+            end
         end
     end
     
     def show
+        # byebug
         shop_id = find_shop(params[:shop_id])
         product_details = Product.find(params[:id])
-        render json:{product_desc: product_details}
+        peoduct_image = JSON.parse product_details["product_image"]
+        render json:{product_desc: product_details, peoduct_image: peoduct_image}
     end
     
     private
