@@ -26,5 +26,5 @@ class SellerController < ApplicationController
         @all_shops = ShopInfo.where(user_id: 2)
         render :json => {msg: "Shop deleted succesfully.", shops: @all_shops}
     end
-    
 end
+

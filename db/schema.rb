@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_26_070045) do
+ActiveRecord::Schema.define(version: 2021_09_03_114931) do
 
   create_table "products", force: :cascade do |t|
     t.string "product_name"
@@ -36,6 +36,8 @@ ActiveRecord::Schema.define(version: 2021_08_26_070045) do
     t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "shop_verify", default: false
+    t.index ["service"], name: "index_shop_infos_on_service"
     t.index ["user_id"], name: "index_shop_infos_on_user_id"
   end
 

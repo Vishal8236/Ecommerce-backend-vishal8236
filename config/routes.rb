@@ -19,4 +19,8 @@ Rails.application.routes.draw do
     delete 'delete_shop/:name', to: 'seller#delete_shop'
   end
 
+  scope '/seller/shop' do
+    post ':id/verify-shop', to: 'shops#verify_shop'
+  end
+
 end
