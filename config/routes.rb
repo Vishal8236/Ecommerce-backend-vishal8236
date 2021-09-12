@@ -23,4 +23,7 @@ Rails.application.routes.draw do
     post ':id/verify-shop', to: 'shops#verify_shop'
   end
 
+  namespace :user do
+    resources :products, only: [:show, :index]
+  end
 end
