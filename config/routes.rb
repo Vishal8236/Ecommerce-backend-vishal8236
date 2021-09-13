@@ -25,5 +25,7 @@ Rails.application.routes.draw do
 
   namespace :user do
     resources :products, only: [:show, :index]
+
+    resources :carts, only: [:index, :create, :destroy]
   end
 end
