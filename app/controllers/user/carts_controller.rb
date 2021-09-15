@@ -11,7 +11,7 @@ class User:: CartsController < ApplicationController
             @products.append(Product.find(item.product_id))
         end
 
-        render json:{products: @products}
+        render json:{products: @products, cart_product_id: @get_cart_products_id}
     end
     
     def create
@@ -23,6 +23,20 @@ class User:: CartsController < ApplicationController
             else
                 render json: {error: "product can't added in cart"}
             end
+        end
+    end
+    
+    def destroy
+        if UserCart.delete(params[:id])
+            @get_cart_products_id = UserCart.all
+
+            @products = [];
+            # byebug
+            @get_cart_products_id.each do |item| 
+                @products.append(Product.find(item.product_id))
+            end
+
+            render json:{products: @products, cart_product_id: @get_cart_products_id}
         end
     end
     
