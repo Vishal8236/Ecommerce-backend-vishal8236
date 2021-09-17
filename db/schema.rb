@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_12_061247) do
+ActiveRecord::Schema.define(version: 2021_09_17_144539) do
 
   create_table "products", force: :cascade do |t|
     t.string "product_name"
@@ -48,6 +48,16 @@ ActiveRecord::Schema.define(version: 2021_09_12_061247) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["product_id"], name: "index_user_carts_on_product_id"
     t.index ["user_id"], name: "index_user_carts_on_user_id"
+  end
+
+  create_table "user_product_purchases", force: :cascade do |t|
+    t.integer "product_id"
+    t.integer "user_id"
+    t.boolean "payment_status", default: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["product_id"], name: "index_user_product_purchases_on_product_id"
+    t.index ["user_id"], name: "index_user_product_purchases_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

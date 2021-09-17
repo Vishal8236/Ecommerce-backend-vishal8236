@@ -31,12 +31,12 @@ class User:: CartsController < ApplicationController
             @get_cart_products_id = UserCart.all
 
             @products = [];
-            # byebug
+
             @get_cart_products_id.each do |item| 
                 @products.append(Product.find(item.product_id))
             end
 
-            render json:{products: @products, cart_product_id: @get_cart_products_id}
+            render json:{products: @products, cart_product_id: @get_cart_products_id, msg: "Product remove Successfully"}
         end
     end
     
